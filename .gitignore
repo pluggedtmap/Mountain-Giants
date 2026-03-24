@@ -1,0 +1,52 @@
+# ==========================================
+# DONNÉES SENSIBLES (JAMAIS sur GitHub)
+# ==========================================
+.env
+data.json
+orders.json
+users.json
+
+# ==========================================
+# FICHIERS LOCAUX (PC seulement)
+# ==========================================
+node_modules/
+package-lock.json
+uploads/
+scripts/
+
+# ==========================================
+# LOGS & CACHE
+# ==========================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+logs/
+
+# ==========================================
+# ÉDITEURS & OS
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ==========================================
+# FICHIERS GEMINI / IA (local seulement)
+# ==========================================
+gemini.md
+.gemini/
+
+# ==========================================
+# FICHIERS À GARDER SUR GITHUB/VPS
+# ==========================================
+# Dockerfile         ✅ GARDER
+# docker-compose.yml ✅ GARDER
+# server.js          ✅ GARDER
+# index.html         ✅ GARDER
+# admin.html         ✅ GARDER
+# package.json       ✅ GARDER
+# nginx_*.conf       ✅ GARDER

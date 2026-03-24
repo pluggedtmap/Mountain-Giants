@@ -1,0 +1,67 @@
+{
+  "appTitle": "Mountain Giants",
+  "navSlogan": "Vibe. High. Speed.",
+  "navImage": "",
+  "navEmoji": "🏠 📬 🛒",
+  "bannerText": "🔥 NEW ARRIVALS: CALI PLUGS & FROZEN SIFT 🔥",
+  "minOrderAmount": 500,
+  "orderTelegram": "cgazbe",
+  "bannerColor": "#efe549",
+  "bannerBorderColor": "rgba(239, 229, 73, 0.6)",
+  "heroImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80",
+  "splashImage": "https://i.ibb.co/vzBzY2m/logo-mountain-giants.png",
+  "contactImage": "https://i.ibb.co/vzBzY2m/logo-mountain-giants.png",
+  "accentColor": "#efe549",
+  "bgType": "lines",
+  "bgBlur": 3,
+  "bgStripe1": "#000000",
+  "bgStripe2": "#000000",
+  "bgGradient1": "#000000",
+  "bgGradient2": "#1a1a1a",
+  "btnRadius": 32,
+  "btnGlow": 1,
+  "cardGlass": 1,
+  "cardRadius": 24,
+  "scrollbarColor": "#333",
+  "deliveryModes": [
+    { "name": "Livraison", "emoji": "🏎️", "enabled": true, "requireInfo": true, "minOrder": 0, "carriers": [] },
+    { "name": "Meetup", "emoji": "🤝", "enabled": true, "requireInfo": false, "minOrder": 0, "carriers": [] },
+    { "name": "Shipping", "emoji": "📦", "enabled": true, "requireInfo": true, "minOrder": 0, "carriers": [{ "name": "Mondial Relay", "price": 25 }] }
+  ],
+  "infoFields": {
+    "pseudo": true,
+    "nom": true,
+    "prenom": true,
+    "adresse": true,
+    "ville": true,
+    "zip": true,
+    "whatsapp": true,
+    "email": true
+  },
+  "fontApp": "Inter",
+  "fontPromo": "Unbounded",
+  "categories": [
+    "WEED",
+    "HASH",
+    "VAPE",
+    "AUTRE"
+  ],
+  "contact": {
+    "telegramPrivate": "https://t.me/cgazbe",
+    "telegramChannel": "https://t.me/Mountain Giants_Channel",
+    "whatsapp": "https://wa.me/33758362541",
+    "instagram": "https://instagram.com/mountain-giants"
+  },
+  "splash": {
+    "title": "Mountain Giants",
+    "subtitle": "Premium Selection",
+    "button": "ENTER THE VIBE",
+    "bg": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80"
+  },
+  "orderRules": [
+    "Livraison sous 30 à 60 minutes",
+    "Paiement à la livraison (Cash/Crypto)",
+    "Minimum de commande variable selon zone",
+    "Respectez le livreur pour un service optimal"
+  ]
+}
