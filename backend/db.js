@@ -58,11 +58,19 @@ function loadData() {
         };
     }
     if (!data.settings.github) data.settings.github = {};
-    if (!data.settings.nextOrderNumber) data.settings.nextOrderNumber = 1001;
-    if (!data.orders) data.orders = [];
+    
+    let structureUpdated = false;
+    if (!data.settings.nextOrderNumber) {
+        data.settings.nextOrderNumber = 1001;
+        structureUpdated = true;
+    }
+    if (!data.orders) {
+        data.orders = [];
+        structureUpdated = true;
+    }
 
-    // Save back if we had to fix it
-    if (!fs.existsSync(DATA_FILE)) saveData(data);
+    // Save back if we had to fix it or it doesn't exist
+    if (structureUpdated || !fs.existsSync(DATA_FILE)) saveData(data);
 
     return data;
 }

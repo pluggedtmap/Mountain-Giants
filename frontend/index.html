@@ -951,7 +951,7 @@
             <div class="space-y-2">
                 <!-- Telegram PV -->
                 <a id="btn-tg-pv" href="javascript:void(0)"
-                    onclick="window.openExternalLink('https://t.me/cgazbe')"
+                    onclick="window.openExternalLink('https://t.me/MGBELGIUM')"
                     class="block bg-[#0088cc]/20 border border-[#0088cc]/30 p-3 rounded-xl flex items-center gap-3 ripple-effect cursor-pointer">
                     <i class="fab fa-telegram text-2xl text-[#0088cc]"></i>
                     <div>
@@ -984,7 +984,7 @@
 
                 <!-- Instagram -->
                 <a id="btn-insta" href="javascript:void(0)"
-                    onclick="window.openExternalLink('https://www.instagram.com/pharma_company_420')"
+                    onclick="window.openExternalLink('https://www.instagram.com/mgbelgium_?igsh=YjJnNjcxNGg0MG5q')"
                     class="block bg-[#E1306C]/20 border border-[#E1306C]/30 p-3 rounded-xl flex items-center gap-3 ripple-effect cursor-pointer">
                     <i class="fab fa-instagram text-2xl text-[#E1306C]"></i>
                     <div>
@@ -2754,16 +2754,15 @@
             if (btn) {
                 btn.disabled = false;
                 btn.classList.remove('btn-loading');
-                btn.setAttribute('data-step', '2');
-                
                 const encodedMsg = encodeURIComponent(msg);
-                // Routage dynamique
-                const tgUserId = appSettings.orderTelegram || "MountainGiants_Channel"; // Updated TG channel
-                const tgNativeUrl = `tg://resolve?domain=${tgUserId}&text=${encodedMsg}`;
-                const tgWebUrl = `https://t.me/${tgUserId}?text=${encodedMsg}`;
+                const tgUserId = appSettings.orderTelegram || "MGBELGIUM";
+                
+                // Use the official share/direct link which works best across all platforms
+                const tgWebUrl = `https://t.me/${tgUserId.replace('@', '')}?text=${encodedMsg}`;
                 
                 const link = document.createElement('a');
-                link.href = tgNativeUrl;
+                link.href = tgWebUrl;
+                link.target = "_blank"; // Important for external links
                 link.id = 'final-order-btn';
                 link.className = "tg-glass-btn w-full py-4 text-center block font-bold cursor-pointer transition-all";
                 link.innerHTML = '<i class="fab fa-telegram-plane mr-2"></i> ENVOYER SUR TELEGRAM';
@@ -2771,14 +2770,14 @@
                 
                 btn.parentNode.replaceChild(link, btn);
 
-                // Auto-ouverture
+                // Auto-ouverture (attempt only)
                 setTimeout(() => {
                     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-                        try { window.Telegram.WebApp.openTelegramLink(tgWebUrl); } catch(e) { window.location.href = tgNativeUrl; }
+                        try { window.Telegram.WebApp.openTelegramLink(tgWebUrl); } catch(e) { window.open(tgWebUrl, '_blank'); }
                     } else {
-                        window.location.href = tgNativeUrl;
+                        window.open(tgWebUrl, '_blank');
                     }
-                }, 100);
+                }, 200);
             }
 
             // Fallback clipboard

@@ -24,8 +24,16 @@ router.post('/', publicLimiter, (req, res) => {
     }
 
     // Set Order Number
-    const orderNum = settings.nextOrderNumber || 1001;
+    let orderNum = settings.nextOrderNumber;
+    
+    // If nextOrderNumber is undefined or null, default to 1001
+    if (orderNum === undefined || orderNum === null) {
+        orderNum = 1001;
+    }
+
     orderData.orderNumber = `MG-${orderNum}`;
+    
+    // Update and persist the next number
     settings.nextOrderNumber = orderNum + 1;
 
     orderData.id = Date.now();

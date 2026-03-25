@@ -5,7 +5,7 @@
   "navEmoji": "🏠 📬 🛒",
   "bannerText": "🔥 NEW ARRIVALS: CALI PLUGS & FROZEN SIFT 🔥",
   "minOrderAmount": 500,
-  "orderTelegram": "cgazbe",
+  "orderTelegram": "MountainGiants_Support",
   "bannerColor": "#efe549",
   "bannerBorderColor": "rgba(239, 229, 73, 0.6)",
   "heroImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80",
@@ -47,9 +47,9 @@
     "AUTRE"
   ],
   "contact": {
-    "telegramPrivate": "https://t.me/cgazbe",
-    "telegramChannel": "https://t.me/+cX02y4g6rqJiMWQ8",
-    "whatsapp": "https://wa.me/33758362541",
+    "telegramPrivate": "https://t.me/MountainGiants_Support",
+    "telegramChannel": "https://t.me/MountainGiants_Channel",
+    "whatsapp": "https://wa.me/YOUR_PHONE",
     "instagram": "https://instagram.com/mountain-giants"
   },
   "splash": {
