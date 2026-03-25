@@ -2,6 +2,7 @@
 # DONNÉES SENSIBLES (JAMAIS sur GitHub)
 # ==========================================
 .env
+backend/data/*.json
 data.json
 orders.json
 users.json

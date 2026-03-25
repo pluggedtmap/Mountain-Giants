@@ -2142,6 +2142,39 @@
         }
 
         // --- INITIALISATION DES GESTES ---
+        
+        function copyToClipboard(text) {
+            if (!text) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast("Message copié !", "success");
+                }).catch(err => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) showToast("Message copié !", "success");
+                else showToast("Échec de la copie", "error");
+            } catch (err) {
+                console.error('Fallback copy failed', err);
+                showToast("Erreur de copie", "error");
+            }
+            document.body.removeChild(textArea);
+        }
 
         function initCartGestures() {
             setupSheetPhysics('cart-handle-area', 'cart-page', window.closeCartPage);
@@ -2780,10 +2813,8 @@
                 }, 200);
             }
 
-            // Fallback clipboard
-            navigator.clipboard.writeText(msg).then(() => {
-                showToast("Commande prête ! Envoyez-la sur Telegram.", "success");
-            }).catch(err => console.error('Erreur', err));
+            // Copie automatique immédiate
+            copyToClipboard(msg);
 
             // Show floating button back
             const btnTel = document.getElementById('telegram-float-btn');

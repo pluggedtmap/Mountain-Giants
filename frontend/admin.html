@@ -841,6 +841,37 @@
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#39;');
         }
+
+        function copyToClipboard(text) {
+            if (!text) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert("Copié !");
+                }).catch(err => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert("Copié !");
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
         let adminToken = localStorage.getItem('adminToken') || null;
         let productsData = {};
         let productsList = [];
@@ -1630,7 +1661,10 @@
                                 <div class="flex gap-2">
                                      <span class="text-[10px] uppercase tracking-wider bg-white/5 px-2 py-1 rounded border border-white/10">${escapeHTML(o.shippingMethod || '')}</span>
                                 </div>
-                                <button onclick="deleteOrder('${o.id}')" class="text-red-500 p-2 hover:bg-red-500/10 rounded-lg transition"><i class="fas fa-trash"></i></button>
+                                <div class="flex gap-1">
+                                    <button onclick="copyToClipboard(decodeURIComponent('${encodeURIComponent(o.rawMessage || '')}'))" class="text-blue-400 p-2 hover:bg-blue-500/10 rounded-lg transition" title="Copier le message"><i class="fas fa-copy"></i></button>
+                                    <button onclick="deleteOrder('${o.id}')" class="text-red-500 p-2 hover:bg-red-500/10 rounded-lg transition"><i class="fas fa-trash"></i></button>
+                                </div>
                             </div>
                         `;
                         list.appendChild(el);
@@ -1991,7 +2025,6 @@
             }
         }
         async function deleteGithubFile(p, s) { if (confirm("Supprimer ?")) await fetch('/api/github-delete', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': adminToken }, body: JSON.stringify({ path: p, sha: s }) }); loadGithubFiles(); }
-        function copyToClipboard(t) { navigator.clipboard.writeText(t).then(() => alert("URL Copiée")); }
         function convertGithubLink(i) { if (i.value.includes('github.com') && i.value.includes('/blob/')) i.value = i.value.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/'); }
         function renderSettingsUI() {
             $('#app-title').value = appSettings.appTitle || ''; $('#banner-text').value = appSettings.bannerText || ''; $('#hero-image').value = appSettings.heroImage || '';
