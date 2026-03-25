@@ -61,7 +61,7 @@ function githubRequest(endpoint, method = 'GET', body = null) {
         const token = (settings.token || GH_UPLOAD_TOKEN || GH_TOKEN || '').trim();
         const owner = settings.owner || GH_OWNER;
         const repo = (endpoint.includes('/contents/') && !endpoint.includes('data.json'))
-            ? (settings.repo || GH_UPLOAD_REPO)
+            ? (settings.uploadRepo || GH_UPLOAD_REPO || settings.repo)
             : (settings.repo || GH_REPO);
 
         console.log(`[GitHub Debug] Uploading to: ${owner}/${repo} (Token starts with ${token ? token.substring(0, 4) : 'NULL'})`);
@@ -75,7 +75,7 @@ function githubRequest(endpoint, method = 'GET', body = null) {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/vnd.github.v3+json',
-                'User-Agent': 'Mountain Giants-App',
+                'User-Agent': 'Mountain-Giants-App',
                 'Content-Type': 'application/json'
             }
         };
@@ -174,7 +174,8 @@ const handleGithubUpload = async (req, res) => {
         // Cleanup local files
         cleanupFiles.forEach(f => { const sf = safePath(f); if (fs.existsSync(sf)) fs.unlinkSync(sf); });
 
-        const rawUrl = `https://raw.githubusercontent.com/${settings.owner || GH_OWNER}/${settings.repo || GH_UPLOAD_REPO}/${GH_BRANCH}/${pathInRepo}`;
+        const mediaRepo = settings.uploadRepo || settings.repo || GH_UPLOAD_REPO;
+        const rawUrl = `https://raw.githubusercontent.com/${settings.owner || GH_OWNER}/${mediaRepo}/${GH_BRANCH}/${pathInRepo}`;
         res.json({ success: true, url: rawUrl, githubData: result });
     } catch (e) {
         console.error("Upload Error", e);
@@ -199,7 +200,7 @@ router.get('/github-files', verifyAdmin, async (req, res) => {
             path: f.path,
             sha: f.sha,
             url: f.download_url,
-            raw_url: `https://raw.githubusercontent.com/${settings.owner || GH_OWNER}/${settings.repo || GH_UPLOAD_REPO}/${GH_BRANCH}/${f.path}`
+            raw_url: `https://raw.githubusercontent.com/${settings.owner || GH_OWNER}/${settings.uploadRepo || settings.repo || GH_UPLOAD_REPO}/${GH_BRANCH}/${f.path}`
         })) : [];
         res.json({ success: true, data: cleanList });
     } catch (e) {

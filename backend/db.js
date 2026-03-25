@@ -33,8 +33,10 @@ function loadData() {
     // Ensure structure integrity
     if (!data.admin) data.admin = {};
     if (!data.admin.passwordHash) {
+        // Initial password is 'adminMGBE' - SHOULD BE CHANGED IMMEDIATELY
+        const initialPass = process.env.INITIAL_ADMIN_PASSWORD || 'adminMGBE';
         const salt = bcrypt.genSaltSync(10);
-        data.admin.passwordHash = bcrypt.hashSync('geantmontagne', salt);
+        data.admin.passwordHash = bcrypt.hashSync(initialPass, salt);
     }
     if (!data.settings) data.settings = {};
     if (!data.settings.categories) data.settings.categories = ['WEED', 'HASH', 'VAPE', 'AUTRE'];
@@ -56,6 +58,7 @@ function loadData() {
         };
     }
     if (!data.settings.github) data.settings.github = {};
+    if (!data.settings.nextOrderNumber) data.settings.nextOrderNumber = 1001;
     if (!data.orders) data.orders = [];
 
     // Save back if we had to fix it
@@ -73,8 +76,15 @@ function saveData(data) {
 
     // 2. Save Rest to data.json (excluding orders)
     try {
+        // Save orders separately
+        if (data.orders) {
+            fs.writeFileSync(ORDERS_FILE, JSON.stringify(data.orders, null, 2));
+        }
+        
+        // Create a copy without orders for data.json
         const dataToSave = { ...data };
         delete dataToSave.orders;
+        
         fs.writeFileSync(DATA_FILE, JSON.stringify(dataToSave, null, 2));
     } catch (e) { console.error("ERREUR ECRITURE DATA.JSON", e); }
 }

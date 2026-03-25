@@ -13,10 +13,13 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
+            background-color: #000;
             color: #ffffff;
-            /* Prevent pull-to-refresh on mobile */
             overscroll-behavior-y: none;
+            background-image: url('https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-25_00-44-30.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         /* Glassmorphism utilities */
@@ -448,10 +451,15 @@
                                         placeholder="pluggedtmap">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Repo</label>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Save Repo</label>
                                     <input type="text" id="gh-repo" class="w-full input-dark rounded-lg px-3 py-3"
-                                        placeholder="Mountain Giants-">
+                                        placeholder="MGBESAVE">
                                 </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Upload Repo (Media)</label>
+                                <input type="text" id="gh-upload-repo" class="w-full input-dark rounded-lg px-3 py-3"
+                                    placeholder="Mountain-Giants-">
                             </div>
                         </div>
                     </div>
@@ -833,7 +841,7 @@
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#39;');
         }
-        let adminToken = null;
+        let adminToken = localStorage.getItem('adminToken') || null;
         let productsData = {};
         let productsList = [];
         let appSettings = { categories: [], contact: {} };
@@ -846,6 +854,7 @@
                 const data = await res.json();
                 if (data.success) {
                     adminToken = data.token;
+                    localStorage.setItem('adminToken', adminToken);
                     $('#login-overlay').classList.add('hidden');
                     $('#main-editor-header').classList.remove('hidden');
                     $('#main-content').classList.remove('hidden');
@@ -854,7 +863,28 @@
             } catch (e) { alert("Erreur connexion serveur"); }
         });
 
-        function logout() { location.reload(); }
+        function logout() { 
+            localStorage.removeItem('adminToken');
+            location.reload(); 
+        }
+
+        window.onload = async () => {
+            if (adminToken) {
+                try {
+                    const res = await fetch('/api/verify', { headers: { 'Authorization': adminToken } });
+                    const data = await res.json();
+                    if (data.success) {
+                        $('#login-overlay').classList.add('hidden');
+                        $('#main-editor-header').classList.remove('hidden');
+                        $('#main-content').classList.remove('hidden');
+                        initAdmin();
+                        return;
+                    }
+                } catch (e) {}
+                localStorage.removeItem('adminToken');
+                adminToken = null;
+            }
+        };
 
         async function initAdmin() {
             await loadSettings();
@@ -881,6 +911,7 @@
             };
             if (map[id]) document.getElementById(map[id]).classList.add('active');
             if (id === 'page-stats') refreshStats();
+            if (id === 'page-orders') loadOrders();
             if (id === 'page-uploads') loadGithubFiles();
             if (id === 'page-clients') loadClients();
         }
@@ -900,6 +931,7 @@
                     $('#gh-token').value = appSettings.github.token || '';
                     $('#gh-owner').value = appSettings.github.owner || '';
                     $('#gh-repo').value = appSettings.github.repo || '';
+                    $('#gh-upload-repo').value = appSettings.github.uploadRepo || '';
                 }
             } catch (e) { console.error(e); }
         }
@@ -918,7 +950,8 @@
             appSettings.github = {
                 token: $('#gh-token').value,
                 owner: $('#gh-owner').value,
-                repo: $('#gh-repo').value
+                repo: $('#gh-repo').value,
+                uploadRepo: $('#gh-upload-repo').value
             };
             try {
                 const res = await fetch('/api/settings', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': adminToken }, body: JSON.stringify(appSettings) });
@@ -1569,7 +1602,7 @@
                         el.innerHTML = `
                             <div class="flex justify-between items-start">
                                 <div>
-                                     <span class="bg-white/10 px-2 py-1 rounded text-xs font-mono text-gray-400">#${(o.id || '').toString().slice(-6)}</span>
+                                     <span class="bg-white/10 px-2 py-1 rounded text-xs font-mono text-gray-400">${o.orderNumber || '#' + (o.id || '').toString().slice(-6)}</span>
                                      <div class="text-xs text-gray-500 mt-1">${o.createdAt ? new Date(o.createdAt).toLocaleString() : ''}</div>
                                 </div>
                                 <span class="text-green-400 font-bold text-lg">${o.total || '0'}€</span>

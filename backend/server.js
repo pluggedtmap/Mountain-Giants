@@ -5,6 +5,8 @@ const {
     helmetMiddleware,
     corsMiddleware,
     forbiddenPaths,
+    loginLimiter,
+    publicLimiter,
     requestLogger
 } = require('./middleware/security');
 
@@ -31,6 +33,8 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static(UPLOAD_DIR));
 
 // --- API ROUTES ---
+app.use('/api/login', loginLimiter); // Protect login Specifically
+
 app.use('/api', authRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/orders', ordersRoutes);

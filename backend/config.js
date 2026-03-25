@@ -28,11 +28,13 @@ const GH_UPLOAD_TOKEN = process.env.GITHUB_UPLOAD_TOKEN || '';
 const GH_UPLOAD_REPO = process.env.GITHUB_UPLOAD_REPO || 'Mountain-Giants';
 
 // --- CORS ---
+const envOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [];
 const ALLOWED_ORIGINS = [
     'https://fullterexotique.online',
     'https://www.fullterexotique.online',
     'http://localhost:3000',
-    'http://localhost:3018'
+    'http://localhost:3018',
+    ...envOrigins
 ];
 
 // --- UPLOAD ---

@@ -41,4 +41,9 @@ router.post('/change-password', verifyAdmin, (req, res) => {
     res.json({ success: true });
 });
 
+// Verify token
+router.get('/verify', verifyAdmin, (req, res) => {
+    res.json({ success: true });
+});
+
 module.exports = router;

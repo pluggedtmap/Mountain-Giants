@@ -14,33 +14,34 @@ router.post('/', publicLimiter, (req, res) => {
     if (!db.orders) db.orders = [];
 
     // Check minimum order amount
-    try {
-        const fs = require('fs');
-        const path = require('path');
-        const settingsPath = path.join(__dirname, '../data/settings.json');
-        const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
-        const minAmount = settings.minOrderAmount || 0;
-        if (orderData.total < minAmount) {
-            return res.status(400).json({ 
-                success: false, 
-                message: `Minimum de commande : ${minAmount}€` 
-            });
-        }
-    } catch (e) { console.error("Error checking minAmount", e); }
+    const settings = db.settings || {};
+    const minAmount = settings.minOrderAmount || 0;
+    if (orderData.total < minAmount) {
+        return res.status(400).json({ 
+            success: false, 
+            message: `Minimum de commande : ${minAmount}€` 
+        });
+    }
+
+    // Set Order Number
+    const orderNum = settings.nextOrderNumber || 1001;
+    orderData.orderNumber = `MG-${orderNum}`;
+    settings.nextOrderNumber = orderNum + 1;
 
     orderData.id = Date.now();
     db.orders.push(orderData);
 
-    if (db.orders.length > 100) db.orders.shift();
+    if (db.orders.length > 500) db.orders.shift();
 
     saveData(db);
-    res.json({ success: true, orderId: orderData.id });
+    res.json({ success: true, orderId: orderData.id, orderNumber: orderData.orderNumber });
 });
 
 // Get all orders (admin)
 router.get('/', verifyAdmin, (req, res) => {
     const db = loadData();
-    const reversed = [...(db.orders || [])].reverse();
+    const orders = db.orders || [];
+    const reversed = [...orders].reverse();
     res.json({ success: true, data: reversed });
 });
 

@@ -36,9 +36,9 @@
         }
         .tg-glass-btn:active { transform: scale(0.95); }
         :root {
-            --bg-dark: #050505;
-            --glass-bg: rgba(30, 30, 35, 0.30);
-            --glass-border: rgba(255, 255, 255, 0.12);
+            --bg-dark: #0f0c29;
+            --glass-bg: rgba(30, 30, 35, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --accent-primary: #ffffff;
             --accent-secondary: #a1a1aa;
             --highlight: #efe549;
@@ -54,17 +54,34 @@
         }
 
         body {
-            font-family: var(--font-app);
-            background-color: var(--bg-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000;
             color: #ffffff;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
             overscroll-behavior-y: none;
-            /* Prevents pull-to-refresh */
+            background-image: url('https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-25_00-44-30.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            -webkit-tap-highlight-color: transparent;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             touch-action: pan-y;
-            /* Improves scroll handling */
             user-select: none;
-            /* Prevents text selection like an app */
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
         }
 
         #app-container {
@@ -108,37 +125,7 @@
             animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
-        /* FOND NOIR UNI */
-        .fond-black {
-            background-color: #000000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
 
-        /* FOND DÉGRADÉ ANIMÉ */
-        #bg-gradient-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: bgGradientAnim 15s ease infinite;
-            transform: scale(1.05);
-            display: none;
-        }
-
-        @keyframes bgGradientAnim {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
 
 
 
@@ -752,19 +739,12 @@
 
 <body>
 
-    <!-- STRUCTURE HTML DU FOND -->
-    <!-- FOND ANIMÉ LIGNES -->
-    <div id="bg-lines-layer" class="fond-black"></div>
-
-    <!-- FOND DÉGRADÉ ANIMÉ -->
-    <div id="bg-gradient-layer"></div>
-
     <!-- Splash Screen -->
     <div id="splash-screen">
         <div class="relative z-10 flex flex-col items-center">
             <!-- Logo géré dynamiquement par le script, mais pré-rempli pour affichage immédiat -->
             <img id="splash-logo" class="splash-logo mb-6"
-                src="https://raw.githubusercontent.com/pluggedtmap/Mountain Giants-/main/photo_3_2026-01-24_13-01-53.jpg"
+                src="https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_3_2026-01-24_13-01-53.jpg"
                 alt="">
 
             <div
@@ -779,7 +759,7 @@
     <div id="app-container">
         <div class="p-4 grid grid-cols-2 gap-3 pt-6">
             <div class="bento-card hero-card col-span-2 h-64 relative group overflow-hidden">
-                <img src="https://raw.githubusercontent.com/pluggedtmap/Mountain Giants-/main/photo_2_2026-01-24_13-01-53.jpg"
+                <img src="https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2_2026-01-24_13-01-53.jpg"
                     class="w-full h-full object-cover" style="object-position: center 25%;">
             </div>
 
@@ -962,7 +942,7 @@
             <div class="text-center mb-4">
                 <!-- Logo Contact lié au script -->
                 <img id="contact-logo-img"
-                    src="https://raw.githubusercontent.com/pluggedtmap/Mountain Giants-/main/photo_3_2026-01-24_13-01-53.jpg"
+                    src="https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_3_2026-01-24_13-01-53.jpg"
                     class="w-14 h-14 rounded-2xl mx-auto mb-2 object-cover shadow-lg"
                     onerror="this.src='https://placehold.co/100/333/fff?text=C'">
                 <h3 class="text-lg font-bold">Mountain Giants</h3>
@@ -980,26 +960,25 @@
                     </div>
                 </a>
 
-                <!-- Luffa Chat -->
-                <!-- Luffa Chat -->
-                <a id="btn-luffa" href="javascript:void(0)"
-                    onclick="window.openExternalLink('https://chat.whatsapp.com/DfLZzmR55YGEB9uTJBPSPe')"
-                    class="block bg-[#a855f7]/20 border border-[#a855f7]/30 p-3 rounded-xl flex items-center gap-3 ripple-effect cursor-pointer">
-                    <img src="https://www.luffa.im/images/singleLogo.png" class="w-8 h-8 rounded-md object-contain">
+                <!-- Signal Channel (MGBE Only) -->
+                <a id="btn-signal" href="javascript:void(0)"
+                    onclick="window.openExternalLink('https://signal.me/#eu/KLe61c2AX0CDPUtqAAeH7tdaQCZbhiUczbUMQUhOF-4DvmD0DZJMrrpr9nVLUaPu')"
+                    class="block bg-[#3a76f0]/20 border border-[#3a76f0]/30 p-3 rounded-xl flex items-center gap-3 ripple-effect cursor-pointer">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcompanieslogo.com%2Fimg%2Forig%2Fsignal-app-e2f0048d.png%3Ft%3D1700708406&f=1&ipt=0679488ec035a51722970aea165a7c5ec422fc4880bc7da4175f13423531af25" class="w-8 h-8 rounded-md object-contain">
                     <div>
-                        <div class="font-bold text-sm text-white">Canal Luffa</div>
-                        <div class="text-[10px] text-[#a855f7]">Rejoignez-nous</div>
+                        <div class="font-bold text-sm text-white">Canal Signal</div>
+                        <div class="text-[10px] text-[#3a76f0]">Rejoignez-nous sur Signal</div>
                     </div>
                 </a>
 
                 <!-- Telegram Canal -->
                 <a id="btn-tg-channel" href="javascript:void(0)"
-                    onclick="window.openExternalLink('https://t.me/Mountain Giants3')"
+                    onclick="window.openExternalLink('https://t.me/+cX02y4g6rqJiMWQ8')"
                     class="block bg-[#0088cc]/20 border border-[#0088cc]/30 p-3 rounded-xl flex items-center gap-3 ripple-effect cursor-pointer">
                     <i class="fab fa-telegram text-2xl text-[#0088cc]"></i>
                     <div>
-                        <div class="font-bold text-sm text-white">Canal principal.</div>
-                        <div class="text-[10px] text-[#0088cc]">Nouveautés et promotions</div>
+                        <div class="font-bold text-sm text-white">Canal Telegram</div>
+                        <div class="text-[10px] text-[#0088cc]">Rejoignez le canal</div>
                     </div>
                 </a>
 
@@ -1464,6 +1443,11 @@
                         const btnLuffa = document.getElementById('btn-luffa');
                         if (btnLuffa && appSettings.contact.whatsapp) {
                             btnLuffa.onclick = (e) => { e.preventDefault(); window.openExternalLink(appSettings.contact.whatsapp); };
+                        }
+
+                        const btnSignal = document.getElementById('btn-signal');
+                        if (btnSignal) {
+                            btnSignal.onclick = (e) => { e.preventDefault(); window.openExternalLink('https://signal.me/#eu/KLe61c2AX0CDPUtqAAeH7tdaQCZbhiUczbUMQUhOF-4DvmD0DZJMrrpr9nVLUaPu'); };
                         }
 
                         const btnInsta = document.getElementById('btn-insta');
@@ -2760,10 +2744,9 @@
                 });
 
                 const result = await response.json();
-                if (result.success && result.orderId) {
-                    const shortId = result.orderId.toString().slice(-6);
-                    // Use 'No ' instead of '#' to avoid URL breaking
-                    msg = `Commande No ${shortId}\n` + msg;
+                if (result.success) {
+                    const displayId = result.orderNumber || (result.orderId ? result.orderId.toString().slice(-6) : '???');
+                    msg = `Commande No ${displayId}\n` + msg;
                 }
             } catch (e) { console.error("Erreur sauvegarde", e); }
 
@@ -2775,7 +2758,7 @@
                 
                 const encodedMsg = encodeURIComponent(msg);
                 // Routage dynamique
-                const tgUserId = appSettings.orderTelegram || "Mountain Giants3";
+                const tgUserId = appSettings.orderTelegram || "MountainGiants_Channel"; // Updated TG channel
                 const tgNativeUrl = `tg://resolve?domain=${tgUserId}&text=${encodedMsg}`;
                 const tgWebUrl = `https://t.me/${tgUserId}?text=${encodedMsg}`;
                 
@@ -2909,25 +2892,13 @@
             container.innerHTML = '';
             selectedPayment = null;
 
-            // Default payment methods — always Cash + Crypto
+            // Only Cash payment method allowed
             let options = [
-                { label: '💶 Cash', value: 'Cash' },
-                { label: '🪙 Crypto', value: 'Crypto' }
+                { label: '💶 Cash', value: 'Cash' }
             ];
 
-            // Find mode in array to check for shipping-only restriction
-            const modesArr = appSettings.deliveryModes || [];
-            const modeObj = modesArr.find(m => m.name === shippingType);
-            if (modeObj && (modeObj.name || '').toLowerCase().includes('shipping')) {
-                options = [{ label: '🪙 Crypto', value: 'Crypto' }];
-            }
-
             // Style adjustment
-            if (options.length <= 2) {
-                container.className = 'grid grid-cols-2 gap-2';
-            } else {
-                container.className = 'grid grid-cols-2 gap-2'; // Force grid for all
-            }
+            container.className = 'grid grid-cols-1 gap-2';
 
             options.forEach((opt, index) => {
                 const btn = document.createElement('button');
@@ -2941,6 +2912,13 @@
                 btn.textContent = opt.label;
                 btn.onclick = () => selectPayment(opt.value, btn);
                 container.appendChild(btn);
+
+                // Auto-select if only one option
+                if (options.length === 1) {
+                    setTimeout(() => {
+                        selectPayment(opt.value, btn);
+                    }, 0);
+                }
             });
         }
 
@@ -3149,31 +3127,6 @@
 
 
 
-    </script>
-
-    <!-- Bouton Flottant Telegram -->
-    <a id="telegram-float-btn" href="https://t.me/cgazbe" target="_blank"
-        class="fixed bottom-24 right-6 z-40 bg-black w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce-in border border-white/10">
-        <img src="https://icones.pro/wp-content/uploads/2021/04/icone-telegramme-symbole-logo-jaune.png"
-            class="w-10 h-10 object-contain" alt="Telegram">
-        <span class="absolute -top-1 -right-1 flex h-4 w-4">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-        </span>
-    </a>
-
-    <script>
-        // Gestion du bouton flottant au scroll
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('telegram-float-btn');
-            if (btn) {
-                if (window.scrollY > 100) {
-                    btn.classList.add('opacity-50', 'scale-90');
-                } else {
-                    btn.classList.remove('opacity-50', 'scale-90');
-                }
-            }
-        });
     </script>
 </body>
 
