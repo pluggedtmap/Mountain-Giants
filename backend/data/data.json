@@ -1,0 +1,77 @@
+{
+  "admin": {
+    "passwordHash": "$2a$10$qz63Pk0vcKs1vi/RJPyji.fgC/DLp8PESm.kZgypC9kAE9NLvpt0e"
+  },
+  "settings": {
+    "categories": [
+      "WEED",
+      "HASH",
+      "VAPE"
+    ],
+    "bannerText": "Bienvenue Chez Mountain Giants ! Premium Dispensary in Belgium !",
+    "contact": {},
+    "github": {
+      "token": "",
+      "owner": "",
+      "repo": "Mountain-Giants",
+      "uploadRepo": ""
+    },
+    "appTitle": "Mountain Giants",
+    "heroImage": "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-24_19-33-21.jpg",
+    "deliveryModes": [
+      {
+        "name": "Meetup",
+        "type": "meetup",
+        "emoji": "🤝",
+        "enabled": true,
+        "minOrder": 300,
+        "requireInfo": false,
+        "carriers": []
+      },
+      {
+        "name": "Livraison",
+        "emoji": "📦",
+        "enabled": true,
+        "requireInfo": true,
+        "carriers": [],
+        "minOrder": 300
+      }
+    ],
+    "minOrderAmount": 500,
+    "orderTelegram": "MGBELGIUM",
+    "bannerColor": "#ffffff",
+    "bannerBorderColor": "#a51d2d",
+    "accentColor": "#ef4444",
+    "scrollbarColor": "#333",
+    "btnRadius": 12,
+    "cardRadius": 16,
+    "bgGradient1": "#0a0a0a",
+    "bgGradient2": "#1a1a1a",
+    "fontApp": "Inter",
+    "splashImage": "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/upload/hf-1774390681087-250144698.jpg",
+    "contactImage": "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/upload/hf-1774390681087-250144698.jpg",
+    "infoFields": {}
+  },
+  "products": {
+    "prod_1774388248301": {
+      "id": "prod_1774388248301",
+      "name": "Produit test",
+      "category": "WEED",
+      "farm": "",
+      "description": "",
+      "descPosition": "top",
+      "extraInfo": "",
+      "extraInfoColor": "#ef4444",
+      "prices": {
+        "1002": 500,
+        "1g": 10
+      },
+      "varieties": [],
+      "mediaMap": {},
+      "images": [
+        "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-24_19-33-21.jpg"
+      ],
+      "order": -1
+    }
+  }
+}

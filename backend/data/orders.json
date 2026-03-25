@@ -1,0 +1,54 @@
+[
+  {
+    "items": [
+      {
+        "id": "prod_1774388248301-Produit test-1g",
+        "name": "Produit test",
+        "variety": "Produit test",
+        "weight": "1g",
+        "price": 10,
+        "quantity": 50,
+        "image": "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-24_19-33-21.jpg"
+      }
+    ],
+    "total": 500,
+    "shippingMethod": "Meetup",
+    "paymentMethod": "Cash",
+    "carrier": null,
+    "userInfo": [
+      {
+        "label": "Pseudo",
+        "value": "Client Meetup"
+      }
+    ],
+    "rawMessage": "👤 Nouvelle Commande Mountain Giants :\n👤 Pseudo: Client Meetup\n\n📦 1g Produit test  x50\n\n🚚 Meetup\n💸 Cash : 500€",
+    "createdAt": "2026-03-24T22:34:04.805Z",
+    "id": 1774391644810
+  },
+  {
+    "items": [
+      {
+        "id": "prod_1774388248301-Produit test-1002",
+        "name": "Produit test",
+        "variety": "Produit test",
+        "weight": "1002",
+        "price": 500,
+        "quantity": 1,
+        "image": "https://raw.githubusercontent.com/pluggedtmap/Mountain-Giants/main/photo_2026-03-24_19-33-21.jpg"
+      }
+    ],
+    "total": 500,
+    "shippingMethod": "Meetup",
+    "paymentMethod": "Cash",
+    "carrier": null,
+    "userInfo": [
+      {
+        "label": "Pseudo",
+        "value": "Client Meetup"
+      }
+    ],
+    "rawMessage": "👤 Nouvelle Commande Mountain Giants :\n👤 Pseudo: Client Meetup\n\n📦 1002 Produit test \n\n🚚 Meetup\n💸 Cash : 500€",
+    "createdAt": "2026-03-24T23:41:30.762Z",
+    "id": 1774395690769
+  }
+]
