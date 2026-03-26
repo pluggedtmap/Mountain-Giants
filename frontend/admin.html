@@ -1464,7 +1464,7 @@
                         if (img) { img.src = data.url; img.style.display = ''; }
                     }
                 } else { alert("Erreur Upload: " + data.message); icon.className = "fas fa-times text-red-500"; }
-            } catch (e) { alert("Erreur upload"); icon.className = "fas fa-times text-red-500"; }
+            } catch (e) { alert("Erreur upload: " + e.message); icon.className = "fas fa-times text-red-500"; }
         }
         async function changePassword() {
             const newPwd = $('#new-admin-password').value;
@@ -1990,7 +1990,7 @@
                     alert("Erreur Upload: " + data.message);
                     icon.className = "fas fa-times text-red-500";
                 }
-            } catch (e) { alert("Erreur upload"); icon.className = "fas fa-times text-red-500"; }
+            } catch (e) { alert("Erreur upload: " + e.message); icon.className = "fas fa-times text-red-500"; }
         }
 
         async function loadGithubFiles() {

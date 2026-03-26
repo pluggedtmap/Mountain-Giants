@@ -50,6 +50,15 @@ app.use((req, res) => {
     }
 });
 
+// --- ERROR HANDLER ---
+app.use((err, req, res, next) => {
+    console.error("Global Error Handler", err);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Erreur interne du serveur"
+    });
+});
+
 // --- START ---
 const server = app.listen(PORT, () => {
     console.log(`✅ Serveur Mountain Giants démarré sur http://localhost:${PORT}`);
