@@ -53,7 +53,7 @@ function loadData() {
             telegramPrivate: "https://t.me/MGBELGIUM",
             telegramChannel: "",
             instagram: "https://www.instagram.com/mgbelgium_?igsh=YjJnNjcxNGg0MG5q",
-            signal: "https://signal.me/#eu/iqOQ32KGhvwe11YLCdQEQoDwYNoDPNIeroQZR5BSoHOC6GJJh6FPhZw5w8AD7MvINE",
+            signal: "https://signal.me/#eu/iqOQ32KGhvwe11YLCdQEQoDwYNoDPNIeroQZR5BSoHOC6GJJh6FPhZw5w8AD7MvI",
             whatsapp: ""
         };
     }
